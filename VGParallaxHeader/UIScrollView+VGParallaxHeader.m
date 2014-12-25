@@ -117,11 +117,14 @@ static void *VGParallaxHeaderObserverContext = &VGParallaxHeaderObserverContext;
     CGFloat height = self.contentOffset.y * -1;
     CGFloat scaleProgress = fmaxf(0, (height / (self.parallaxHeader.originalHeight + self.parallaxHeader.originalTopInset)));
     self.parallaxHeader.progress = scaleProgress;
-    
-    if (self.contentOffset.y < 0) {
+    NSLog(@"%f",self.contentOffset.y);
+    if (self.contentOffset.y < -200) {
         // This is where the magic is happening
         self.parallaxHeader.frame = CGRectMake(0, self.contentOffset.y, CGRectGetWidth(self.frame), height);
+    }else{
+        self.parallaxHeader.frame = CGRectMake(0, self.contentOffset.y, CGRectGetWidth(self.frame), 199);
     }
+    NSLog(@"%@",NSStringFromCGRect(self.parallaxHeader.frame) );
 }
 
 - (void)setParallaxHeader:(VGParallaxHeader *)parallaxHeader
